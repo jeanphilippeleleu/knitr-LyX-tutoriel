@@ -1,0 +1,2901 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{listings}
+\usepackage{picinpar}
+\end_preamble
+\use_default_options true
+\begin_modules
+knitr
+\end_modules
+\maintain_unincluded_children false
+\language french
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement H
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 3cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Knitr et LyX
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status collapsed
+
+\begin_layout Plain Layout
+
+<<Op, include=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+knit_hooks$set(Options=function(before, options,envir){
+\end_layout
+
+\begin_layout Plain Layout
+
+if(before){paste("
+\backslash
+
+\backslash
+begin{alltt}","<<",paste(options)[length(options)],">>= 
+\backslash
+n","
+\backslash
+
+\backslash
+end{alltt}", sep="")}
+\end_layout
+
+\begin_layout Plain Layout
+
+else {paste("",sep="")}
+\end_layout
+
+\begin_layout Plain Layout
+
+})
+\end_layout
+
+\begin_layout Plain Layout
+
+#opts_chunk$set(Options=TRUE)
+\end_layout
+
+\begin_layout Plain Layout
+
+options(digits=2,width=55)
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+fonction pour afficher les options de knitr
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Présentation.
+\end_layout
+
+\begin_layout Standard
+Knitr acronyme provenant de l'anglais 'to knit' qui veux dire tricoter et
+ 'r' pour le langage R.
+ Il s'agit d'un module qui s’intègre dans le logiciel LyX qui permet l'écriture,
+ l’exécution et l'affichage de résultats de code écrit en R au sein de document
+ textuel.
+ Réalisé par yihui xie
+\begin_inset CommandInset citation
+LatexCommand cite
+key "knitr"
+
+\end_inset
+
+.
+ knitr peu être utilisé directement dans R puisqu'il s'agit d'une library
+ de R, mais alors une bonne connaissance de LaTeX est nécessaire, LyX est
+ d'un abord plus aisé.
+ 
+\end_layout
+
+\begin_layout Section*
+Syntaxe de base.
+\end_layout
+
+\begin_layout Standard
+Il faut avoir sélectionné dans LyX le module knitr.
+ Aller dans 
+\series bold
+Document, Paramètres, Modules
+\series default
+, Ajouter knitr.
+\end_layout
+
+\begin_layout Standard
+Le code R doit être écrit dans un environnement particulier, ceux-ci sont
+ accessible dans le menu 
+\series bold
+Insertion
+\series default
+, 
+\series bold
+Inserts personanlisables
+\series default
+ puis 
+\series bold
+Bloc
+\series default
+.
+ La première ligne de chaque Bloc appelé également chunk doit commencer
+ par 
+\begin_inset Formula $\ll\:\gg=$
+\end_inset
+
+ les ligne suivante sont le code R à exécuter.
+ L'exemple de la figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:1"
+
+\end_inset
+
+ ci-dessous produit 100 valeur d'une variable normal de moyenne 1, puis
+ renvois la moyenne de l'échantillon et affiche l'histogramme correspondant.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figure/bloc.png
+	scale 40
+	BoundingBox 0bp 0bp 900bp 200bp
+	groupId bloc
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dans le document final cela produit:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<out.width='8cm', out.height='8cm'>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+var<-rnorm(100,2.5)
+\end_layout
+
+\begin_layout Plain Layout
+
+mean(var)
+\end_layout
+
+\begin_layout Plain Layout
+
+hist(var)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Bien évidement il existe de nombreuses options permettant de formater, de
+ redimensionner les graphiques, d'afficher ou non le code, de présenter
+ les résultats sous forme de tableau etc..., tous ses paramètres sont à inclure
+ sur la première ligne du chunk entre les 
+\begin_inset Formula $\ll~\gg=$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Il est à noter qu'un clique sur la partie grisée du bloc affiche ou non
+ le code écrit dedans.
+\end_layout
+
+\begin_layout Subsection*
+Expression en ligne.
+\end_layout
+
+\begin_layout Standard
+Il est possible d'évaluer des expressions R en ligne c'est a dire inséré
+ directement dans le texte d'une phrase le résultat d'une variable, soit
+ via l'onglet 
+\series bold
+Insertion
+\series default
+, 
+\series bold
+Inserts personnalisables, S/R expression 
+\series default
+et on écrit directement le code R et le résultat sera affiché dans le document
+ final, soit de faire un insère TeX et écrire l'expression 
+\begin_inset space \space{}
+\end_inset
+
+ 
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "12em"
+special "none"
+height "1in"
+height_special "totalheight"
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+Sexpr{code R a évaluer}
+\end_layout
+
+\end_inset
+
+.
+ ainsi la moyenne de l'échantillon vaut 
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "9em"
+special "none"
+height "1in"
+height_special "totalheight"
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+Sexpr{mean(var)}
+\end_layout
+
+\end_inset
+
+, donnera : ainsi la moyenne de l'échantillon vaut 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Sexpr{mean(var)}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Les variables déclarées dans un bloc sont accessible dans tout le document
+ dans tous les blocs suivants et expression en ligne.
+\end_layout
+
+\begin_layout Section*
+Les options.
+\end_layout
+
+\begin_layout Standard
+Dans la suite du document on indiquera les valeurs de chaque options entre
+ parenthèses, la première valeur est la valeur par défaut, les valeurs possible
+ sont également indiquées booléennes, numériques, ou littérales.
+ En pratique on ne doit pas écrire les options entre parenthèse mais comme
+ suit:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<nomLabel, option1=TRUE, option2='text2', option3=2, Options=TRUE>>=
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Chaque bloc (portion de code) peu recevoir un nom (label) qui doit être
+ unique.
+ Si aucun label n'est écrit knitr en génère un comme suit ``unnamed-chunk-i''
+ i pour le i
+\begin_inset Formula $^{ieme}$
+\end_inset
+
+ chunk ou bloc.
+\end_layout
+
+\begin_layout Subsection*
+Evaluation du code.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+eval
+\series default
+ (TRUE/FALSE ou numérique) évalue le code ou non.
+ La valeur peu être également un vecteur numérique qui sélectionne alors
+ les expression de R à évaluer (ligne de code), par ex.
+ eval=c(1,5) : évalue la première et la cinquième ligne et c(-3) évalue
+ toutes les lignes sauf la troisième.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Résultats literaux.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+echo
+\series default
+ (TRUE/FALSE ou numérique) affiche ou pas le code source, la valeur peu
+ être numérique fonctionne comme pour 'eval'.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+results
+\series default
+ ('markup' ou autre).
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+'markup':écrit le résultat au format LaTeX.
+\end_layout
+
+\begin_layout Itemize
+'asis' : écrit les résultats bruts sans formatage (pour xtable p.
+ ex).
+\end_layout
+
+\begin_layout Itemize
+'hold' : retient tous les résultats et les affiches à la fin du chunk.
+\end_layout
+
+\begin_layout Itemize
+'hide' : cache les résultats.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+warning
+\series default
+ (TRUE/FALSE) affiche ou pas les messages d'avertissements produit par la
+ fonction R warning().
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+error
+\series default
+ (TRUE/FALSE) affiche ou non les messages d'erreurs.
+ (en général en cas d'erreur l'évaluation est stoppé et la compilation du
+ document est également stoppé)
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+message
+\series default
+ (TRUE/FALSE) affiche ou non les messages produit par la fonction message()
+ de R.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+split
+\series default
+ (FALSE/TRUE) sépare ou non la sortie de R en des fichiers séparés et les
+ inclus après dans le document avec la fonction 
+\series bold
+input
+\series default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+include
+\series default
+ (TRUE/FALSE) inclus ou non la sortie de R dans le document final.
+ si 
+\series bold
+include
+\series default
+=FALSE rien ne sera écrit dans le document mais le code sera quand même
+ évalué et les graphiques générés, ceux-ci pourront être insérés manuellement
+ après par l'utilisateur.Option à utiliser lorsque que le code et le résultat
+ n'a aucun intérêt à être vu pour le lecteur.
+\end_layout
+
+\begin_layout Subsection*
+Mise en forme du code.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+tidy
+\series default
+ (FALSE/TRUE) permet d'avoir un code bien structuré et propre, grâce à la
+ fonction tidy.source() du package formatR.
+ Remplace les 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$"="$
+\end_layout
+
+\end_inset
+
+ par l'affectation classique 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$"<-"$
+\end_layout
+
+\end_inset
+
+, indente le code dans les boucles 'for' , etc...
+ Voir également les options de tidy.source().
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+prompt
+\series default
+ (FALSE/TRUE) affiche ou non le caractère du prompt 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$">"$
+\end_layout
+
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+comment
+\series default
+ ('
+\backslash
+#
+\backslash
+#'; caractère) caractère affiché en début de ligne de chaque résultats.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+highlight
+\series default
+ (TRUE; FALSE) permet de colorer le code.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+size
+\series default
+ ('normalsize'; caractère) fixe la taille de la police pour la sortie LaTeX.
+ (voir les options du package highlight pour les valeurs possibles: size
+ = c("normalsize", "tiny", "scriptsize", "footnotesize", "small", "large",
+ "Large", "LARGE", "huge", "Huge")
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+background
+\series default
+ ('
+\backslash
+#F7F7F7', caractère ou numerique) permet de fixer la couleur du fond.
+ La couleur est donnée en rgb (red, green, blue) soit en hexdecimale, valeur
+ entre 0 et 1 pour chaque composante ou couleur nommée, qui sont celles
+ disponible dans R (red, springgreen3, ...) voir la fonction colors() de R
+ pour une liste complète.
+\end_layout
+
+\begin_layout Subsection*
+Cache.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+cache
+\series default
+ (FALSE/TRUE) met en réserve ou non le code chunk.
+ Lorsque 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$<<cache=TRUE>>=$
+\end_layout
+
+\end_inset
+
+ le chunk n'est pas évaluer mais le résultat est chargé dans le document
+ et provient d'une précédente évaluation.
+ Cette évaluation se fait lors de la première évaluation ou s'il y a eu
+ une modification du code chunk, l'ensemble des objets crées sont enregistrés
+ au format R.
+ Option très utile lorsque le code charge des données volumineuses ou que
+ le traitement des données est long on évite ainsi de ré évaluer le code
+ à chaque nouvelle compilation du document final.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+cache.path
+\series default
+ ('cache/'; caractère) préfixe utilisé pour les fichiers cache.
+ par défaut les fichier sont sauver dans un dossier 'cache' placé dans le
+ dossier courant de travail.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+cache.vars
+\series default
+ (NULL) un vecteur de caractère contenant le nom des variables destinées
+ à être sauvé dans le 'cache'.
+ Par défaut toutes les variables sont sauvées.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+dependson
+\series default
+ (NULL; caractère ou numerique) est un vecteur de nom de chunk pour spécifier
+ de quel autre chunk il dépend.
+ Cette option ne s'applique qu'aux chunk avec un cache=TRUE.
+ Ainsi lorsqu'un chunk sera mis à jour les chunk dépendant (chunk fils)
+ le seront également.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+autodep
+\series default
+ (FALSE; TRUE) analyse le code au niveau des variable global pour connaître
+ les dépendance entre les chunks.
+ L'option dependson est alors inutile dans ce cas.
+\end_layout
+
+\begin_layout Section*
+Graphiques.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+fig.path
+\series default
+('figure/'; caractère) préfixe utilisé pour le nom des fichiers graphiques.
+ (fig.path et le nom du chunk sont assemblé pour former le nom du fichier)
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+fig.keep
+\series default
+ ('high'; caractère) la manière dont les graphiques seront produit.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+'high' : garde uniquement les graphiques de haut niveau (fusionne les changement
+s de bas niveau )
+\end_layout
+
+\begin_layout Itemize
+'none' : n'affiche aucun graphique.
+\end_layout
+
+\begin_layout Itemize
+'all' : garde toutes les figures (l'ajout d'un paramètre graphique de bas
+ niveau produira un nouveau graphique )
+\end_layout
+
+\begin_layout Itemize
+'first' : garde uniquement le premier graphique.
+\end_layout
+
+\begin_layout Itemize
+'last' : garde uniquement le dernier graphique.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+fig.show
+\series default
+ ('asis'; caractère) affichage et disposition des graphiques.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+'asis' : affiche les figures à l'endroit du code ou elles sont générées.
+\end_layout
+
+\begin_layout Itemize
+'hold' : retient les figures et les affichent à la fin du chunk.
+\end_layout
+
+\begin_layout Itemize
+'animate' : rassemble toutes les figure pour créer une animation, si le
+ chunk génère plusieurs figures.
+\end_layout
+
+\begin_layout Itemize
+'hide' : les figures sont générées et enregistrés sur le disque dur mais
+ ne sont pas affiché.
+ Elles peuvent être ensuite inclus dans le document manuellement dans d'autres
+ endroits ou dans des environnement particulier (ex.
+ enrobage de figure).
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+dev
+\series default
+ ('pdf' pour une sortie LaTeX et 'png' pour une page HTML/ markdown; caractère)
+ indique le nom de la fonction qui sera utilisé pour la sortie graphique.
+ Une vingtaine d'autres fonctions sont disponible pour autant que les packages
+ soient installer dans R (bmp, svg, jpg, ...)
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+dpi
+\series default
+ (72, numérique) pour les sorties bitmap indique le nombre de pixels par
+ pouce.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+fig.width
+\series default
+, 
+\series bold
+fig.height
+\series default
+ (7, numérique) hauteur et largeur des graphiques en pouce.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+out.width
+\series default
+, 
+\series bold
+out.height
+\series default
+ (NULL, caractère) hauteur et largeur dans le document final, qui peut être
+ différent de ceux indiqués dans fig.width et fig.height du fait d'une mise
+ à l'échelle dans le document final.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+quelques exemple latex: '.8
+\backslash
+
+\backslash
+linewidth', '3in' ou '8cm'.
+\end_layout
+
+\begin_layout Itemize
+en HTML: '300px'.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+out.extra 
+\series default
+(NULL, caractère) option supplémentaire, ex out.extra=' angle=90 ', provoque
+ une rotation de 90° de la figure.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+fig.align
+\series default
+ ('default', caractère) permet l'alignement des figures, valeurs possibles:
+ 'left', 'center', 'right' .
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+fig.cap
+\series default
+ (NULL, caractère) légende utilisé pour la figure.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+fig.scap
+\series default
+ (NULL, caratère) légende courte, tous les mots placé avant un '.', ';' ou
+ ':' seront utilisé comme légende.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+fig.lp
+\series default
+ ('fig', caractère) mot utilisé comme préfixe pour les figures, par défaut
+ concatène le préfixe et le nom (label) du chunk: 'fig:label1' .
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+fig.pos
+\begin_inset CommandInset label
+LatexCommand label
+name "fig.pos"
+
+\end_inset
+
+
+\series default
+ (' ', caractère) indique la position à utiliser dans le document, les valeurs
+ sont celles utilisées en 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+LaTeX
+\end_layout
+
+\end_inset
+
+ dans 
+\backslash
+begin{figure}[fig.pos].
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+'h' Place le flottant ici, c'est-à-dire à l'endroit auquel il apparaît dans
+ le texte source.
+\end_layout
+
+\begin_layout Itemize
+'t' Position en haut de la page.
+ 
+\end_layout
+
+\begin_layout Itemize
+'b' Position en bas de la page.
+ 
+\end_layout
+
+\begin_layout Itemize
+'p' Place sur une page particulière réservée aux flottants.
+ 
+\end_layout
+
+\begin_layout Itemize
+'!' Passe outre les paramètres internes que Latex utilise pour déterminer
+ une position optimale des flottants.
+\end_layout
+
+\end_deeper
+\begin_layout Subsection*
+Quelques exemples de graphiques.
+\end_layout
+
+\begin_layout Standard
+Un graphique simple de 6cm de large, centré et positionner ici.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status collapsed
+
+\begin_layout Plain Layout
+
+<<echo=T, out.width='6cm', fig.align='center', fig.pos='!', Options=T>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+hist(var, main='variable normale', col="grey")
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Pour le titre il vaut mieux éviter d'utiliser le paramètre 
+\series bold
+main
+\series default
+='titreDeLaFigure' ou la fonction 
+\series bold
+title
+\series default
+('titreDeLaFigure') de R mais plutôt utiliser le paramètre 
+\series bold
+fig.cap='
+\series default
+titreDeLaFigure
+\series bold
+'
+\series default
+ du bloc, cela permet en plus d'écrire le titre, de référencer la figure
+ dans le document final lorsque que l'on écrit en LaTeX.
+\end_layout
+
+\begin_layout Standard
+Dans LyX 
+\begin_inset space \space{}
+\end_inset
+
+ la meilleur méthode est de placer le code R dans un flottant de figure
+ cela permet de référencer la figure dans LyX , dans le document final et
+ d’insérer une référence croisée au sujet de la figure suivante c'est à
+ dire la fig.
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:histogramme-d'une-variable"
+
+\end_inset
+
+ au sein du texte.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename figure/bloc4.png
+	scale 40
+	BoundingBox 0bp 0bp 900bp 200bp
+	groupId bloc
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<out.width='6cm', fig.align='center', echo=T, Options=T>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+hist(var, col="grey", main="")
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+histogramme d'une variable normale
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:histogramme-d'une-variable"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Graphiques multiples.
+\end_layout
+
+\begin_layout Standard
+Les graphiques multiples ne posent pas problèmes particulier on utilise
+ le paramètre 
+\series bold
+mfrow()
+\series default
+ de la fonction 
+\series bold
+par()
+\series default
+ par exemple pour diviser la sortie graphique en autant de ligne et de colonnes
+ souhaitées.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<out.width='7cm', fig.align='center', Options=T>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+par(mfrow=c(2,2)); # divise le graphique en 2 lignes et 2 colonne
+\end_layout
+
+\begin_layout Plain Layout
+
+x<-rnorm(100,1,1)
+\end_layout
+
+\begin_layout Plain Layout
+
+hist(x, col="grey");
+\end_layout
+
+\begin_layout Plain Layout
+
+boxplot(x, horizontal=T, col="grey");
+\end_layout
+
+\begin_layout Plain Layout
+
+d<-density(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+hist(x,freq=F, col="blue")
+\end_layout
+
+\begin_layout Plain Layout
+
+lines(d, col="red")
+\end_layout
+
+\begin_layout Plain Layout
+
+qqplot(x,rnorm(100,0,1))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+figures multiples
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+améliorer le graphique, couleur, courbe de densitée
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+faire un graphique avec des sous figures et des figures enrobés de texte
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Les figures double ou triples peuvent être réalisées dans LyX
+\begin_inset space \space{}
+\end_inset
+
+en incluant plusieurs flottants de figures dans un flottant de figure, on
+ obtient alors des sous-flottants de figures numérotés par des lettres.
+ On peu écrire directement le code R dans le flottant de figure comme ci
+ dessous ce qui produit la figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Variable-normale"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename figure/sousFlottantFig.png
+	lyxscale 60
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align left
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<out.width='7cm', fig.align='center', echo=FALSE>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+hist(x, col="grey")
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+histogramme
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<out.width='7cm', fig.align='center', echo=FALSE>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+boxplot(x, horizontal=T, col="grey");
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+boite à moustache
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Variable normale
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Variable-normale"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Une autre manière de faire consiste à générer le graphique à un endroit
+ quelconque du document et à mettre l'option 
+\series bold
+fig.show
+\series default
+='hide' ce qui ne produit aucune figure dans le document mais celle-ci est
+ quand même écrite sur le disque dur il ne reste plus qu'a intégrer la figure
+ de manière classique.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<graph, fig.show='hide', Options=T>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+x<-rnorm(100,4,2)
+\end_layout
+
+\begin_layout Plain Layout
+
+hist(x, col="grey20")
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{window}[0,l,{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename figure/graph-1.pdf
+	lyxscale 25
+	scale 15
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+},]
+\end_layout
+
+\begin_layout Plain Layout
+
+{}
+\end_layout
+
+\end_inset
+
+En effet knitr utilise un système de cache lorsqu'une figure est produite,
+ le code R qui produit la figure est évalué à la première compilation du
+ document la figure est alors intégré au document et enregistré sur le disque
+ dur dans le dossier 
+\series bold
+figure
+\series default
+.
+ Lors d'une prochaine compilation si le code de la figure n'a pas changer
+ knitr intégrera directement la figure deja produite sans de nouveau évaluer
+ le code ce qui permet d’accélérer la compilation.
+ On peut tirer partie de ce mécanisme lorsque l'on veut intégrer une figure
+ dans un environnement qui ne peut accepter du code R, par exemple dans
+ un enrobé de figure avec window{} du package picinpar.
+ Il faut alors compiler deux fois le document une fois pour créer l'image
+ et l'enregistrer sur le disque et une autre fois pour intégrer l'image
+ dans le document.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{window}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Graphique en perspective.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<out.width='12cm', Options=T>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+require(grDevices) 
+\end_layout
+
+\begin_layout Plain Layout
+
+x<-seq(-10,10,length=30); 
+\end_layout
+
+\begin_layout Plain Layout
+
+y<-x;
+\end_layout
+
+\begin_layout Plain Layout
+
+f<-function(x,y){r<-sqrt(x^2+y^2);10*sin(r)/r}
+\end_layout
+
+\begin_layout Plain Layout
+
+z<-outer(x,y,f);
+\end_layout
+
+\begin_layout Plain Layout
+
+z[is.na(z)]<-1;
+\end_layout
+
+\begin_layout Plain Layout
+
+op<-par(bg="white");
+\end_layout
+
+\begin_layout Plain Layout
+
+persp(x,y,z,theta=30,phi=30,expand=0.5,col="lightblue");
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+perspective
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Cartographie.
+\end_layout
+
+\begin_layout Standard
+La représentation de cartes se fait de la même manière que les graphiques,
+ seule quelques bibliothèques R supplémentaires sont nécessaires, notamment
+ 
+\series bold
+sp
+\series default
+ et 
+\series bold
+rgdal
+\series default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "sp"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "rgdal"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+R peut ouvrir de nombreux types de fichiers vectoriels et rasters via la
+ bibliothèque 
+\series bold
+rgdal
+\series default
+.
+ Le type le plus courant est le format shape (.shp).
+\end_layout
+
+\begin_layout Standard
+couche1 est un objet de type spatialPolygonDataFrame.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+readOGR
+\series default
+() permet de charger un fichier cartographique dans R (shp, mif, dxf ...),
+ pour le type shapes layer=nom du fichier sans l'extension et dsn=nom du
+ dossier contenant le fichier.
+ (pour les autres type voir la documentation
+\begin_inset CommandInset citation
+LatexCommand cite
+key "rgdal"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+on accède au dataframe de l'objet spatial avec le slot 
+\series bold
+@data
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+str
+\series default
+() indique la structure de l'objet et 
+\series bold
+head
+\series default
+() les 10 premiers enregistrement.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<out.width="7cm",message=F ,Options=T>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+library(rgdal)
+\end_layout
+
+\begin_layout Plain Layout
+
+couche1<-readOGR(layer='Scottish', dsn='data', verbose=F)
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(couche1)
+\end_layout
+
+\begin_layout Plain Layout
+
+box()
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Écosse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+D’autres bibliothèques peuvent améliorer l'apparence (sp, rgrs, ggplot2,
+ cartography ...) liste non exhaustive, voir également Analyse spatiales sous
+ R de Nicolas Casajus 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gisonr"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+spplot
+\series default
+ de la librairie sp, le paramètre zcol spécifie la colonne à cartographier.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<out.width="7cm", Options=T>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+head(couche1@data)
+\end_layout
+
+\begin_layout Plain Layout
+
+spplot(couche1, zcol=c('pcaff'))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Écosse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+mettre un exemple de graphique cartograhy et rgl
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Autre exemple avec le package cartography 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cartography"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<< size="scriptsize",out.width="8cm", Options=T>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+library("cartography")
+\end_layout
+
+\begin_layout Plain Layout
+
+opar <- par(mar = c(0,0,1.2,0)) #fixe les marges
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+cols <- carto.pal(pal1 = "green.pal", n1 = 2, pal2 = "red.pal", n2 = 4) #creer
+ la palette de couleur
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(couche1, border = NA, col = NA, bg = "#A6CAE0") #couleur du fond (mer)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+couche1@data$Sir<-couche1@data$Observed/couche1@data$Expected #vecteur a
+ cartographier
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+choroLayer(spdf = couche1,      
+\end_layout
+
+\begin_layout Plain Layout
+
+	df = couche1@data,           
+\end_layout
+
+\begin_layout Plain Layout
+
+	var = "Sir",         
+\end_layout
+
+\begin_layout Plain Layout
+
+	breaks = c(0,0.5,1,2,4,6),            
+\end_layout
+
+\begin_layout Plain Layout
+
+	col = cols, # colors             
+\end_layout
+
+\begin_layout Plain Layout
+
+	border = "grey40",            
+\end_layout
+
+\begin_layout Plain Layout
+
+	lwd = 0.5,         
+\end_layout
+
+\begin_layout Plain Layout
+
+	legend.pos = "right",            
+\end_layout
+
+\begin_layout Plain Layout
+
+	legend.title.txt = "SIR 
+\backslash
+ncancer de la lèvre",            
+\end_layout
+
+\begin_layout Plain Layout
+
+	legend.values.rnd = 2,            
+\end_layout
+
+\begin_layout Plain Layout
+
+	add = TRUE)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+layoutLayer(title = "Cancer de la lèvre en Ecosse", 
+\end_layout
+
+\begin_layout Plain Layout
+
+	author = "jp LELEU",              
+\end_layout
+
+\begin_layout Plain Layout
+
+	sources = "source", 
+\end_layout
+
+\begin_layout Plain Layout
+
+	frame = FALSE, 
+\end_layout
+
+\begin_layout Plain Layout
+
+	col = "grey40",              
+\end_layout
+
+\begin_layout Plain Layout
+
+	scale = 0,
+\end_layout
+
+\begin_layout Plain Layout
+
+	coltitle = "black",             
+\end_layout
+
+\begin_layout Plain Layout
+
+	north = TRUE)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Graphique avec ggplot2.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<graphggplot, out.width="8cm", Options=T>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+library(ggplot2)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+mtcars$gear <- factor(mtcars$gear,levels=c(3,4,5),    
+\end_layout
+
+\begin_layout Plain Layout
+
+labels=c("3 vitesses","4 vitesses","5 vitesses")) 
+\end_layout
+
+\begin_layout Plain Layout
+
+mtcars$am <- factor(mtcars$am,levels=c(0,1),    
+\end_layout
+
+\begin_layout Plain Layout
+
+labels=c("Automatique","Manuelle")) 
+\end_layout
+
+\begin_layout Plain Layout
+
+mtcars$cyl <- factor(mtcars$cyl,levels=c(4,6,8),    
+\end_layout
+
+\begin_layout Plain Layout
+
+labels=c("4cyl","6cyl","8cyl"))
+\end_layout
+
+\begin_layout Plain Layout
+
+qplot(mpg, data=mtcars, geom="density", fill=gear, alpha=I(.5),    
+\end_layout
+
+\begin_layout Plain Layout
+
+main="Distribution de la consommation", xlab="Miles par Gallon",    ylab="Densit
+é")
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Graphique ggplot2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+child Document.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+child
+\series default
+ (NULL, caractère) un vecteur de noms de fichiers à exécuter et à intégrer
+ au document principal.
+\end_layout
+
+\begin_layout Subsection*
+Options globales.
+\end_layout
+
+\begin_layout Standard
+Il est possible si on utilise fréquemment une option de la changer de manière
+ globale pour l'ensemble du document avec la fonction opts_chunk$set(option1=val
+1, option2=val2), évidement à mettre au début du document.
+ Il faut noter aussi que opts_chunk$set n'est pas à mettre dans les options
+ mais à écrire comme du code R.
+\end_layout
+
+\begin_layout Standard
+ex: n'affiche pas le code R exécuté ni les avis d'alertes et redimensionne
+ les graphiques à 8cm de large pour l'ensemble du document.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status collapsed
+
+\begin_layout Plain Layout
+
+<<optionGlobales, eval=F, Options=T>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+opts_chunk$set(echo=FALSE, warning=FALSE, out.width='8cm')
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Externalisation du code.
+\end_layout
+
+\begin_layout Standard
+knitr permet de sourcer du code R c'est à dire importer un fichier texte
+ contenant du code R et exécuter ce code grâce à la fonction read_chunk().
+ Il ne s'agit pas d'une option, la fonction doit être intégré dans un chunk
+ comme une fonction R classique.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status collapsed
+
+\begin_layout Plain Layout
+
+<< eval=F, Options=T>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+read_chunk('nomDeFichier.R')
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ou 'nomDeFichier.R' est fichier texte contenant le code R, celui-ci doit
+ contenir des noms de chunk pour pouvoir les réutiliser par la suite ceux-ci
+ peuvent être écris de 2 manières:
+\end_layout
+
+\begin_layout Standard
+## - - - - nom1 - - - -
+\end_layout
+
+\begin_layout Standard
+code R a exécuter
+\end_layout
+
+\begin_layout Standard
+## - - - - nom2 - - - -
+\end_layout
+
+\begin_layout Standard
+autre code R
+\end_layout
+
+\begin_layout Standard
+@ knitr nom3
+\end_layout
+
+\begin_layout Standard
+autre code R
+\end_layout
+
+\begin_layout Standard
+nom1, nom2 et nom3 peuvent ensuite être utilisés dans le document comme
+ un chunk normal, il suffit de l'appeler par son nom:
+\end_layout
+
+\begin_layout Standard
+<< nom1 >>=
+\end_layout
+
+\begin_layout Standard
+Dans le but d'externaliser du code R on peut également utiliser les fonctions
+ R classiques à savoir 
+\series bold
+load
+\series default
+(
+\begin_inset Quotes fld
+\end_inset
+
+nomFichier.RData
+\begin_inset Quotes frd
+\end_inset
+
+) pour charger un ou plusieurs objets R ou 
+\series bold
+source
+\series default
+(
+\begin_inset Quotes fld
+\end_inset
+
+nomFichier.R
+\begin_inset Quotes frd
+\end_inset
+
+) pour charger un script écrit en R.
+\end_layout
+
+\begin_layout Standard
+L'idée pouvant être étendu au partage d'objet R entre plusieurs documents.
+ Imaginons que l'on ait à écrire un article et sa présentation en style
+ 
+\begin_inset Quotes fld
+\end_inset
+
+power point
+\begin_inset Quotes frd
+\end_inset
+
+ (par exemple à l'aide de la classe Beamer), l'article comprend le corps
+ du texte ainsi que le traitement des données sous R en enregistrant les
+ résultats principaux graphiques, tableaux, etc...
+ qui devront être présent dans la présentation à l'aide de la fonction 
+\series bold
+save
+\series default
+(objet1, objet2,..., file=
+\begin_inset Quotes frd
+\end_inset
+
+nomFichier.RData
+\begin_inset Quotes frd
+\end_inset
+
+).
+ Ces objets peuvent être récupérés dans la présentation à l'aide de la fonction
+ 
+\series bold
+load
+\series default
+(
+\begin_inset Quotes fld
+\end_inset
+
+nomFichier.RData
+\begin_inset Quotes frd
+\end_inset
+
+).
+ Ainsi la compilation de l'article va produire les différents objets et
+ les écrire sur le disque dur, et la compilation de la présentation va charger
+ les objets produit par l'article, il y a donc une mise a jour automatique
+ des résultats entre les deux documents, ce qui évite les fastidieux copier-coll
+er de graphiques de tableaux plus ou moins bien mise en page.
+\end_layout
+
+\begin_layout Section*
+Utilisation de xtable.
+\end_layout
+
+\begin_layout Standard
+Xtable
+\begin_inset CommandInset citation
+LatexCommand cite
+key "xtable"
+
+\end_inset
+
+ est une librairie de R qui permet d'exporter un objet qui peut être mis
+ sous forme d'un tableau, cette mise en forme est faites avec des balise
+ LaTeX, pour afficher un tableau on doit utiliser l'option 
+\series bold
+results
+\series default
+='asis'.
+\end_layout
+
+\begin_layout Standard
+Exemple tableau sans mise en forme.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<size="small">>=
+\end_layout
+
+\begin_layout Plain Layout
+
+data(iris)
+\end_layout
+
+\begin_layout Plain Layout
+
+print(head(iris))
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Le même tableau avec xtable, ne pas oublier 
+\series bold
+results
+\series default
+='asis'.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<results='asis', Options=T>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+library(xtable)
+\end_layout
+
+\begin_layout Plain Layout
+
+data(iris)
+\end_layout
+
+\begin_layout Plain Layout
+
+print(xtable(head(iris),caption='Iris') )
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Des options sont disponible pour la fonction xtable comme le placement (floating
+=TRUE par défaut), ou via à la fonction print comme caption ou scale pour
+ modifier l'échelle comme pour le tableau 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{tabscale}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<results='asis', echo=T, Options=T>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+print(xtable(head(iris),floating=TRUE,caption='Iris
+\backslash
+
+\backslash
+label{tabscale}'),label="tabscale",include.rownames=FALSE, scalebox=0.7)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+options de xtable les plus courantes:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+caption
+\series default
+='texte' : titre du tableau.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+label
+\series default
+='texte' : label utilisé pour le référencement.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+floating
+\series default
+=(TRUE; FALSE) placement du tableau dans le document flottant ou non.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+align
+\series default
+="r|llrc" permet d’aligner les colonnes 'r' right, 'l' left ,'c' center
+ et '|' permet de positionner une ligne verticale, chaque lettre représente
+ une colonne, p{3cm} permet de faire une colonne de 3 cm.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+digits
+\series default
+=0 ou autre spécifie le nombre de décimale à afficher dans le tableau.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+exemple met les colonnes 2 et 4 sans decimale.
+ 
+\end_layout
+
+\begin_layout Itemize
+(res<-xtable(res) ; digits(res)[c(2,4)]<-0
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+include.colnames
+\series default
+=(TRUE, FALSE) affiche le nom des colonnes.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+include.rownames
+\series default
+=(TRUE, FALSE) affiche le nom (numéro) des lignes.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+rotate.rownames
+\series default
+=(FALSE, TRUE) rotation de nom de lignes.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+rotate.colnames
+\series default
+=(FALSE, TRUE) rotation des nom de colonnes.
+\end_layout
+
+\begin_layout Subsubsection*
+Options de print:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+caption.placement
+\series default
+=('bottom', 'top') : placement du titre.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+table.placement
+\series default
+=('','h','b','t','p','!') : placement du tableau.
+ voir
+\series bold
+ fig.pos
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig.pos"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+latex.environment
+\series default
+= ('NULL', 'center') : permet de centrer ou non le tableau.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+tabular.environment
+\series default
+='longtable' : permet d'afficher des tableau long (sur plusieurs pages).
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+scalebox
+\series default
+=0.7 : multiplie par 0.7 la taille du tableau.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+hline.after
+\series default
+=c(1): ajoute une ligne après le ou les numéros de colonnes spécifiés.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+L'utilisation de l'option 
+\series bold
+label
+\series default
+ dans LyX , qui rappelons-le permet de référencer et citer les tableaux
+ dans le texte présente une une petite particularité.
+\end_layout
+
+\begin_layout Standard
+Dans le code suivant on remarque que label est spécifier 2 fois, une première
+ fois dans le caption de la fonction xtable précédé de 
+\backslash
+
+\backslash
+ et dans la fonction print.
+ L'un des label est interprété dans R et l'autre dans le compilateur TeX
+ , bien évidement le label doit être identique dans les 2 définitions.
+ La référence au tableau ainsi créé se fera dans un insère TeX sous forme
+ 
+\backslash
+ref{nomLabel}.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<results='asis', echo=T, Options=T>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+print(xtable(head(iris),caption="Iris
+\backslash
+
+\backslash
+label{TabIris}"), label="TabIris", table.placement="!")
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Le tableau
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{TabIris}
+\end_layout
+
+\end_inset
+
+ est maintenant référencé.
+\end_layout
+
+\begin_layout Standard
+Dans LyX il est préférable de mettre le tableau dans un flottant de tableau,
+ le titre et le référencement y sont plus aisé, il faut alors mettre l'option
+ floating=FALSE 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<results='asis', Options=TRUE>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+print(xtable(head(iris)), floating=FALSE)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+xtable inclus dans un flottant de tableau deLyX
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Astuces.
+\end_layout
+
+\begin_layout Subsubsection*
+Définition d'une nouvelle options.
+\end_layout
+
+\begin_layout Standard
+Dans ce document de nombreux blocs présentent l'option : 
+\begin_inset Quotes fld
+\end_inset
+
+Options=TRUE
+\begin_inset Quotes frd
+\end_inset
+
+ cette option n'existe pas dans knitr à l'origine, elle a pour but d'afficher
+ dans la sortie les options des blocs à titre pédagogique.
+ knitr possède un mécanisme qui permet de modifier ou de définir de nouvelle
+ options grâce à la fonction knit_hooks$set().
+ Nous allons voir à titre d’exemple la définition de cette nouvelle option.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status collapsed
+
+\begin_layout Plain Layout
+
+<<eval=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+knit_hooks$set(Options=function(before, options,envir){
+\end_layout
+
+\begin_layout Plain Layout
+
+if(before)
+\end_layout
+
+\begin_layout Plain Layout
+
+{paste("
+\backslash
+
+\backslash
+begin{alltt}","<<",paste(options)[length(options)],">>= 
+\backslash
+n","
+\backslash
+
+\backslash
+end{alltt}", sep="")}
+\end_layout
+
+\begin_layout Plain Layout
+
+else 
+\end_layout
+
+\begin_layout Plain Layout
+
+{paste("",sep="")}
+\end_layout
+
+\begin_layout Plain Layout
+
+})
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La nouvelle options nommée 
+\begin_inset Quotes fld
+\end_inset
+
+Options
+\begin_inset Quotes frd
+\end_inset
+
+ est appelé deux fois, une fois avant l'évaluation du code R la variable
+ 'before' est alors égale à TRUE et une fois après l'évaluation du code,'
+ before' est égal à FALSE.
+ Ce mécanisme permet d'écrire avant et après le résultat renvoyer par R,
+ par exemple des balises LaTeX.
+ La variable 'options' correspond à l'ensemble des options possible d'un
+ bloc et la dernière partie de cette variable correspond aux options écris
+ par l’utilisateur.
+ Au final on insère les options écrite par l'utilisateur entre des << >>=
+ dans un environnement {alltt} (similaire à verbatim) avant les résultats
+ des blocs et rien après les résultats.
+\end_layout
+
+\begin_layout Subsubsection*
+Formatage des nombres.
+\end_layout
+
+\begin_layout Standard
+Par exemple pour que les nombres soient affichés avec un arrondis à deux
+ chiffres après la virgule pour l'ensemble du document on peut fixer des
+ options directement dans R avec digits=2.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status collapsed
+
+\begin_layout Plain Layout
+
+<<>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+x<-0.1234567
+\end_layout
+
+\begin_layout Plain Layout
+
+options(digits=2, width=50)
+\end_layout
+
+\begin_layout Plain Layout
+
+x
+\end_layout
+
+\begin_layout Plain Layout
+
+#voir ?options pour plus de détails
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+montrer que l on peut utiliser une expression R pour la valeur d'une option
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "xtable"
+key "xtable"
+
+\end_inset
+
+http://cran.r-project.org/web/packages/xtable/xtable.pdf
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "knitr"
+key "knitr"
+
+\end_inset
+
+http://yihui.name/knitr/
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "rgdal"
+key "rgdal"
+
+\end_inset
+
+Roger Bivand, Keitt Tim, Rowlingson Barry, Edzer Pebesma, Sumner Michael,
+ Hijmans Robert.
+ Bindings for the Geospatial Data Abstraction Library.
+  https://r-forge.r-project.org/projects/rgdal/ 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "sp"
+key "sp"
+
+\end_inset
+
+Edzer Pebesma and Roger Bivand.
+ Classes and methods for spatial data.
+ http://cran.r-project.org/web/packages/sp/sp.pdf
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "gisonr"
+key "gisonr"
+
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+target "http://qcbs.ca/wiki/_media/gisonr.pdf"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "cartography"
+key "cartography"
+
+\end_inset
+
+https://cran.r-project.org/web/packages/cartography/index.html
+\end_layout
+
+\end_body
+\end_document
