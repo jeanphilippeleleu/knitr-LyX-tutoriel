@@ -179,6 +179,8 @@ key "knitr"
  knitr peu être utilisé directement dans R puisqu'il s'agit d'une library
  de R, mais alors une bonne connaissance de LaTeX est nécessaire, LyX est
  d'un abord plus aisé.
+ Normalement le module ktnir est installer dans LyX il faut bien évidement
+ que R soit installer.
  
 \end_layout
 
@@ -203,7 +205,7 @@ Insertion
 \series default
 , 
 \series bold
-Inserts personanlisables
+Inserts personnalisables
 \series default
  puis 
 \series bold
@@ -284,7 +286,7 @@ status open
 
 \begin_layout Plain Layout
 
-var<-rnorm(100,2.5)
+var<-rnorm(100,1)
 \end_layout
 
 \begin_layout Plain Layout
@@ -400,8 +402,8 @@ Sexpr{mean(var)}
 \end_layout
 
 \begin_layout Standard
-Les variables déclarées dans un bloc sont accessible dans tout le document
- dans tous les blocs suivants et expression en ligne.
+Les variables déclarées dans un bloc sont accessibles dans tout le document
+ et dans tous les blocs suivants et expressions en lignes.
 \end_layout
 
 \begin_layout Section*
@@ -1050,7 +1052,7 @@ reference "fig:histogramme-d'une-variable"
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Flex Chunk
@@ -1383,12 +1385,7 @@ status open
 
 \begin_layout Plain Layout
 
-x<-rnorm(100,4,2)
-\end_layout
-
-\begin_layout Plain Layout
-
-hist(x, col="grey20")
+curve(x^3-3*x, -2, 2) 
 \end_layout
 
 \end_inset
@@ -1435,14 +1432,14 @@ status collapsed
 
 En effet knitr utilise un système de cache lorsqu'une figure est produite,
  le code R qui produit la figure est évalué à la première compilation du
- document la figure est alors intégré au document et enregistré sur le disque
- dur dans le dossier 
+ document, la figure est alors intégré au document et enregistrée sur le
+ disque dur dans le dossier 
 \series bold
 figure
 \series default
 .
  Lors d'une prochaine compilation si le code de la figure n'a pas changer
- knitr intégrera directement la figure deja produite sans de nouveau évaluer
+ knitr intégrera directement la figure déjà produite sans de nouveau évaluer
  le code ce qui permet d’accélérer la compilation.
  On peut tirer partie de ce mécanisme lorsque l'on veut intégrer une figure
  dans un environnement qui ne peut accepter du code R, par exemple dans
