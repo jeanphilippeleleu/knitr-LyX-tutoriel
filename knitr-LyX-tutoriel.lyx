@@ -1443,7 +1443,7 @@ figure
  le code ce qui permet d’accélérer la compilation.
  On peut tirer partie de ce mécanisme lorsque l'on veut intégrer une figure
  dans un environnement qui ne peut accepter du code R, par exemple dans
- un enrobé de figure avec window{} du package picinpar.
+ un enrobé de figure avec window{} du package picinpar comme le figure ci-contre.
  Il faut alors compiler deux fois le document une fois pour créer l'image
  et l'enregistrer sur le disque et une autre fois pour intégrer l'image
  dans le document.
