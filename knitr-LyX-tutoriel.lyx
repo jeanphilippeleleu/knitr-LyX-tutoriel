@@ -1,7 +1,9 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
-\lyxformat 474
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
 \begin_document
 \begin_header
+\save_transient_properties true
+\origin unavailable
 \textclass article
 \begin_preamble
 \usepackage{listings}
@@ -16,16 +18,16 @@ knitr
 \language_package default
 \inputencoding utf8
 \fontencoding global
-\font_roman default
-\font_sans default
-\font_typewriter default
-\font_math auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100
-\font_tt_scale 100
+\font_sf_scale 100 100
+\font_tt_scale 100 100
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -91,7 +93,8 @@ knitr
 \begin_body
 
 \begin_layout Title
-Knitr et LyX
+Knitr et \SpecialChar LyX
+
 \end_layout
 
 \begin_layout Standard
@@ -163,11 +166,25 @@ Présentation.
 \end_layout
 
 \begin_layout Standard
-Knitr acronyme provenant de l'anglais 'to knit' qui veux dire tricoter et
- 'r' pour le langage R.
- Il s'agit d'un module qui s’intègre dans le logiciel LyX qui permet l'écriture,
- l’exécution et l'affichage de résultats de code écrit en R au sein de document
- textuel.
+Knitr est un acronyme provenant de l'anglais 'to knit' qui veux dire tricoter
+ et 'r' pour le langage R
+\begin_inset CommandInset citation
+LatexCommand cite
+key "R"
+
+\end_inset
+
+.
+ Il s'agit d'un module qui s’intègre dans le logiciel \SpecialChar LyX
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "LyX"
+
+\end_inset
+
+ qui permet l'écriture, l’exécution et l'affichage de résultats de code
+ écrit en R au sein de document textuel.
  Réalisé par yihui xie
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -176,10 +193,15 @@ key "knitr"
 \end_inset
 
 .
- knitr peu être utilisé directement dans R puisqu'il s'agit d'une library
- de R, mais alors une bonne connaissance de LaTeX est nécessaire, LyX est
- d'un abord plus aisé.
- Normalement le module ktnir est installer dans LyX il faut bien évidement
+ Knitr peu être utilisé directement dans R puisqu'il s'agit d'une library
+ de R, mais alors une bonne connaissance de \SpecialChar LaTeX
+ est nécessaire.
+ \SpecialChar LyX
+ est d'un abord plus aisé et représente un changement moins important que
+ LATEX pour des personnes utilisant Word ou Libre office habituellement
+ .
+ Normalement le module ktnir est installer dans \SpecialChar LyX
+ il faut bien évidement
  que R soit installer.
  
 \end_layout
@@ -189,7 +211,8 @@ Syntaxe de base.
 \end_layout
 
 \begin_layout Standard
-Il faut avoir sélectionné dans LyX le module knitr.
+Il faut avoir sélectionné dans \SpecialChar LyX
+ le module knitr.
  Aller dans 
 \series bold
 Document, Paramètres, Modules
@@ -336,7 +359,8 @@ Insertion
 Inserts personnalisables, S/R expression 
 \series default
 et on écrit directement le code R et le résultat sera affiché dans le document
- final, soit de faire un insère TeX et écrire l'expression 
+ final, soit de faire un insère \SpecialChar TeX
+ et écrire l'expression 
 \begin_inset space \space{}
 \end_inset
 
@@ -352,6 +376,11 @@ width "12em"
 special "none"
 height "1in"
 height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
 status collapsed
 
 \begin_layout Plain Layout
@@ -375,6 +404,11 @@ width "9em"
 special "none"
 height "1in"
 height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
 status collapsed
 
 \begin_layout Plain Layout
@@ -479,11 +513,16 @@ echo
 results
 \series default
  ('markup' ou autre).
+\begin_inset Separator latexpar
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-'markup':écrit le résultat au format LaTeX.
+'markup':écrit le résultat au format \SpecialChar LaTeX
+.
 \end_layout
 
 \begin_layout Itemize
@@ -638,7 +677,8 @@ highlight
 \series bold
 size
 \series default
- ('normalsize'; caractère) fixe la taille de la police pour la sortie LaTeX.
+ ('normalsize'; caractère) fixe la taille de la police pour la sortie \SpecialChar LaTeX
+.
  (voir les options du package highlight pour les valeurs possibles: size
  = c("normalsize", "tiny", "scriptsize", "footnotesize", "small", "large",
  "Large", "LARGE", "huge", "Huge")
@@ -750,6 +790,10 @@ fig.path
 fig.keep
 \series default
  ('high'; caractère) la manière dont les graphiques seront produit.
+\begin_inset Separator latexpar
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
@@ -782,6 +826,10 @@ s de bas niveau )
 fig.show
 \series default
  ('asis'; caractère) affichage et disposition des graphiques.
+\begin_inset Separator latexpar
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
@@ -812,7 +860,8 @@ fig.show
 \series bold
 dev
 \series default
- ('pdf' pour une sortie LaTeX et 'png' pour une page HTML/ markdown; caractère)
+ ('pdf' pour une sortie \SpecialChar LaTeX
+ et 'png' pour une page HTML/ markdown; caractère)
  indique le nom de la fonction qui sera utilisé pour la sortie graphique.
  Une vingtaine d'autres fonctions sont disponible pour autant que les packages
  soient installer dans R (bmp, svg, jpg, ...)
@@ -851,6 +900,10 @@ out.height
  (NULL, caractère) hauteur et largeur dans le document final, qui peut être
  différent de ceux indiqués dans fig.width et fig.height du fait d'une mise
  à l'échelle dans le document final.
+\begin_inset Separator latexpar
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
@@ -940,6 +993,10 @@ LaTeX
  dans 
 \backslash
 begin{figure}[fig.pos].
+\begin_inset Separator latexpar
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
@@ -1014,18 +1071,20 @@ titreDeLaFigure
 '
 \series default
  du bloc, cela permet en plus d'écrire le titre, de référencer la figure
- dans le document final lorsque que l'on écrit en LaTeX.
+ dans le document final lorsque que l'on écrit en \SpecialChar LaTeX
+.
 \end_layout
 
 \begin_layout Standard
-Dans LyX 
+Dans \SpecialChar LyX
+ 
 \begin_inset space \space{}
 \end_inset
 
  la meilleur méthode est de placer le code R dans un flottant de figure
- cela permet de référencer la figure dans LyX , dans le document final et
- d’insérer une référence croisée au sujet de la figure suivante c'est à
- dire la fig.
+ cela permet de référencer la figure dans \SpecialChar LyX
+ , dans le document final et d’insérer
+ une référence croisée au sujet de la figure suivante c'est à dire la fig.
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:histogramme-d'une-variable"
@@ -1217,7 +1276,8 @@ faire un graphique avec des sous figures et des figures enrobés de texte
 \end_layout
 
 \begin_layout Standard
-Les figures double ou triples peuvent être réalisées dans LyX
+Les figures double ou triples peuvent être réalisées dans \SpecialChar LyX
+
 \begin_inset space \space{}
 \end_inset
 
@@ -2268,7 +2328,8 @@ key "xtable"
 
  est une librairie de R qui permet d'exporter un objet qui peut être mis
  sous forme d'un tableau, cette mise en forme est faites avec des balise
- LaTeX, pour afficher un tableau on doit utiliser l'option 
+ \SpecialChar LaTeX
+, pour afficher un tableau on doit utiliser l'option 
 \series bold
 results
 \series default
@@ -2426,6 +2487,10 @@ align
 digits
 \series default
 =0 ou autre spécifie le nombre de décimale à afficher dans le tableau.
+\begin_inset Separator latexpar
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
@@ -2545,8 +2610,9 @@ L'utilisation de l'option
 \series bold
 label
 \series default
- dans LyX , qui rappelons-le permet de référencer et citer les tableaux
- dans le texte présente une une petite particularité.
+ dans \SpecialChar LyX
+ , qui rappelons-le permet de référencer et citer les tableaux dans
+ le texte présente une une petite particularité.
 \end_layout
 
 \begin_layout Standard
@@ -2556,10 +2622,11 @@ Dans le code suivant on remarque que label est spécifier 2 fois, une première
 
 \backslash
  et dans la fonction print.
- L'un des label est interprété dans R et l'autre dans le compilateur TeX
- , bien évidement le label doit être identique dans les 2 définitions.
- La référence au tableau ainsi créé se fera dans un insère TeX sous forme
- 
+ L'un des label est interprété dans R et l'autre dans le compilateur \SpecialChar TeX
+ ,
+ bien évidement le label doit être identique dans les 2 définitions.
+ La référence au tableau ainsi créé se fera dans un insère \SpecialChar TeX
+ sous forme 
 \backslash
 ref{nomLabel}.
 \end_layout
@@ -2605,7 +2672,8 @@ ref{TabIris}
 \end_layout
 
 \begin_layout Standard
-Dans LyX il est préférable de mettre le tableau dans un flottant de tableau,
+Dans \SpecialChar LyX
+ il est préférable de mettre le tableau dans un flottant de tableau,
  le titre et le référencement y sont plus aisé, il faut alors mettre l'option
  floating=FALSE 
 \end_layout
@@ -2640,7 +2708,8 @@ print(xtable(head(iris)), floating=FALSE)
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-xtable inclus dans un flottant de tableau deLyX
+xtable inclus dans un flottant de tableau de\SpecialChar LyX
+
 \end_layout
 
 \end_inset
@@ -2749,7 +2818,8 @@ Options
  'before' est alors égale à TRUE et une fois après l'évaluation du code,'
  before' est égal à FALSE.
  Ce mécanisme permet d'écrire avant et après le résultat renvoyer par R,
- par exemple des balises LaTeX.
+ par exemple des balises \SpecialChar LaTeX
+.
  La variable 'options' correspond à l'ensemble des options possible d'un
  bloc et la dernière partie de cette variable correspond aux options écris
  par l’utilisateur.
@@ -2814,6 +2884,31 @@ montrer que l on peut utiliser une expression R pour la valeur d'une option
 \end_inset
 
 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "lyx"
+key "LyX"
+
+\end_inset
+
+https://www.lyx.org/WebFr.Home
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "R"
+key "R"
+
+\end_inset
+
+R Development Core Team (2008).
+ R: A language and environment for statistical computing.
+ R Foundation for Statistical Computing, Vienna, Austria.
+ ISBN 3-900051-07-0, URL http://www.R-project.org.
 \end_layout
 
 \begin_layout Bibliography
