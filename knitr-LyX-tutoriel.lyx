@@ -42,7 +42,7 @@ knitr
 \pdf_bookmarksopen false
 \pdf_bookmarksopenlevel 1
 \pdf_breaklinks false
-\pdf_pdfborder false
+\pdf_pdfborder true
 \pdf_colorlinks false
 \pdf_backref false
 \pdf_pdfusetitle true
@@ -150,7 +150,7 @@ options(digits=2,width=55)
 
 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 fonction pour afficher les options de knitr
@@ -184,7 +184,18 @@ key "LyX"
 \end_inset
 
  qui permet l'écriture, l’exécution et l'affichage de résultats de code
- écrit en R au sein de document textuel.
+ écrit en R 
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Il est à noter que d'autres langage que R peuvent être utiliser avec knitr
+ tel que le python, le bash, le C...
+\end_layout
+
+\end_inset
+
+au sein d'un document textuel c'est que l'on appel de la programmation littérale.
  Réalisé par yihui xie
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -192,32 +203,66 @@ key "knitr"
 
 \end_inset
 
-.
- Knitr peu être utilisé directement dans R puisqu'il s'agit d'une library
+, Knitr peu être utilisé directement dans R puisqu'il s'agit d'une library
  de R, mais alors une bonne connaissance de \SpecialChar LaTeX
  est nécessaire.
  \SpecialChar LyX
  est d'un abord plus aisé et représente un changement moins important que
- LATEX pour des personnes utilisant Word ou Libre office habituellement
- .
- Normalement le module ktnir est installer dans \SpecialChar LyX
- il faut bien évidement
- que R soit installer.
- 
+ \SpecialChar LaTeX
+ pour des personnes utilisant Word ou Libre office habituellement .
 \end_layout
 
 \begin_layout Section*
 Syntaxe de base.
 \end_layout
 
+\begin_layout Subsection*
+Premiers pas.
+\end_layout
+
 \begin_layout Standard
-Il faut avoir sélectionné dans \SpecialChar LyX
- le module knitr.
- Aller dans 
+Une fois R et \SpecialChar LyX
+ installer, ouvrir \SpecialChar LyX
+ et créer un nouveau document puis fixer
+ quelques paramètres pour ce faire aller dans 
 \series bold
-Document, Paramètres, Modules
+l'onglet\SpecialChar menuseparator
+ Document\SpecialChar menuseparator
+ Paramètres, 
 \series default
-, Ajouter knitr.
+dans la partie 
+\series bold
+classe de document
+\series default
+ choisissez
+\series bold
+ Articles
+\series default
+(classe standard)
+\series bold
+ 
+\series default
+, dans la partie
+\series bold
+ Modules
+\series default
+ choisissez 
+\series bold
+Rnw
+\series default
+(knitr) et dans la partie 
+\series bold
+langue
+\series default
+s choisissez 
+\series bold
+Françai
+\series default
+s (et Encodage Unicode utf8), appuyer sur 
+\series bold
+OK
+\series default
+ et vous êtes prés à commencer un nouveaux document.
 \end_layout
 
 \begin_layout Standard
@@ -235,12 +280,12 @@ Inserts personnalisables
 Bloc
 \series default
 .
- La première ligne de chaque Bloc appelé également chunk doit commencer
- par 
+ La première ligne de chaque Bloc doit commencer par une syntaxe particulière
+ 
 \begin_inset Formula $\ll\:\gg=$
 \end_inset
 
- les ligne suivante sont le code R à exécuter.
+ et les lignes suivantes sont le code R à exécuter.
  L'exemple de la figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -248,8 +293,13 @@ reference "fig:1"
 
 \end_inset
 
- ci-dessous produit 100 valeur d'une variable normal de moyenne 1, puis
- renvois la moyenne de l'échantillon et affiche l'histogramme correspondant.
+ ci-dessous ou la première ligne après 
+\begin_inset Formula $\ll\:\gg=$
+\end_inset
+
+ produit 100 valeur d'une variable normal de moyenne 1, puis la deuxième
+ ligne renvois la moyenne de l'échantillon et la troisième affiche l'histogramme
+ correspondant.
 \end_layout
 
 \begin_layout Standard
@@ -257,7 +307,7 @@ reference "fig:1"
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -300,7 +350,7 @@ Dans le document final cela produit:
 
 \begin_layout Standard
 \begin_inset Flex Chunk
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -331,7 +381,7 @@ hist(var)
 Bien évidement il existe de nombreuses options permettant de formater, de
  redimensionner les graphiques, d'afficher ou non le code, de présenter
  les résultats sous forme de tableau etc..., tous ses paramètres sont à inclure
- sur la première ligne du chunk entre les 
+ sur la première ligne entre les 
 \begin_inset Formula $\ll~\gg=$
 \end_inset
 
@@ -339,8 +389,11 @@ Bien évidement il existe de nombreuses options permettant de formater, de
 \end_layout
 
 \begin_layout Standard
-Il est à noter qu'un clique sur la partie grisée du bloc affiche ou non
- le code écrit dedans.
+Il est à noter qu'un clique sur la partie grisée du bloc permet de replier
+ ou de déplier le code écrit dedans ce qui permet selon les circonstance
+ de ce concentrer soit sur le code soit sur le texte du document.
+ Les flottants de figures permettant d'afficher des graphiques obéissent
+ au même mécanisme.
 \end_layout
 
 \begin_layout Subsection*
@@ -348,7 +401,7 @@ Expression en ligne.
 \end_layout
 
 \begin_layout Standard
-Il est possible d'évaluer des expressions R en ligne c'est a dire inséré
+Il est possible d'évaluer des expressions R en ligne c'est a dire d'insérer
  directement dans le texte d'une phrase le résultat d'une variable, soit
  via l'onglet 
 \series bold
@@ -477,6 +530,22 @@ Chaque bloc (portion de code) peu recevoir un nom (label) qui doit être
  chunk ou bloc.
 \end_layout
 
+\begin_layout Standard
+Il est à noter que l'on peut écrire les options d'une autre manière en se
+ positionnant dans un bloc puis un click droit fait apparaître un onglet
+ dans lequel l'une des valeurs est 
+\series bold
+Options 
+\series default
+qui a sont tour fait apparaître un encart dans lequel on peut écrire les
+ options séparer par des virgules, dans ce cas il n'est pas nécessaire d'encadre
+r les valeurs par 
+\begin_inset Formula $\ll\:\gg=$
+\end_inset
+
+ .
+\end_layout
+
 \begin_layout Subsection*
 Evaluation du code.
 \end_layout
@@ -490,7 +559,8 @@ eval
  La valeur peu être également un vecteur numérique qui sélectionne alors
  les expression de R à évaluer (ligne de code), par ex.
  eval=c(1,5) : évalue la première et la cinquième ligne et c(-3) évalue
- toutes les lignes sauf la troisième.
+ toutes les lignes sauf la troisième, enfin c(2:5) évalue de la deuxième
+ ligne à la cinquième ligne.
  
 \end_layout
 
@@ -503,8 +573,9 @@ Résultats literaux.
 \series bold
 echo
 \series default
- (TRUE/FALSE ou numérique) affiche ou pas le code source, la valeur peu
- être numérique fonctionne comme pour 'eval'.
+ (TRUE/FALSE ou numérique) affiche ou pas le code source (affiche le résultat
+ dans tous les cas), la valeur peu être numérique fonctionne comme pour
+ 'eval'.
 \end_layout
 
 \begin_layout Itemize
@@ -535,7 +606,7 @@ results
 \end_layout
 
 \begin_layout Itemize
-'hide' : cache les résultats.
+'hide' : cache les résultats (mais pas le code source).
 \end_layout
 
 \end_deeper
@@ -977,19 +1048,7 @@ name "fig.pos"
 
 \series default
  (' ', caractère) indique la position à utiliser dans le document, les valeurs
- sont celles utilisées en 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-LaTeX
-\end_layout
-
-\end_inset
-
+ sont celles utilisées en \SpecialChar LaTeX
  dans 
 \backslash
 begin{figure}[fig.pos].
@@ -1077,14 +1136,25 @@ titreDeLaFigure
 
 \begin_layout Standard
 Dans \SpecialChar LyX
- 
-\begin_inset space \space{}
-\end_inset
-
  la meilleur méthode est de placer le code R dans un flottant de figure
- cela permet de référencer la figure dans \SpecialChar LyX
- , dans le document final et d’insérer
- une référence croisée au sujet de la figure suivante c'est à dire la fig.
+ comme ci-dessous (menu
+\series bold
+ Insertion
+\series default
+\SpecialChar menuseparator
+ 
+\series bold
+Flottant
+\series default
+\SpecialChar menuseparator
+ 
+\series bold
+Figure
+\series default
+) cela permet de référencer la figure dans \SpecialChar LyX
+ (dans la liste des figures)
+ , dans le document final et de pouvoir insérer une référence croisée au
+ sujet de la figure suivante c'est à dire la fig.
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:histogramme-d'une-variable"
@@ -1179,7 +1249,7 @@ par()
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Flex Chunk
@@ -1202,12 +1272,12 @@ x<-rnorm(100,1,1)
 
 \begin_layout Plain Layout
 
-hist(x, col="grey");
+hist(x, col="grey"); #histogramme
 \end_layout
 
 \begin_layout Plain Layout
 
-boxplot(x, horizontal=T, col="grey");
+boxplot(x, horizontal=T, col="grey"); #boite a moustache
 \end_layout
 
 \begin_layout Plain Layout
@@ -1217,17 +1287,17 @@ d<-density(x)
 
 \begin_layout Plain Layout
 
-hist(x,freq=F, col="blue")
+hist(x,freq=F, col="blue") #histogramme
 \end_layout
 
 \begin_layout Plain Layout
 
-lines(d, col="red")
+lines(d, col="red")	#courbe de densité associé a l'histogramme
 \end_layout
 
 \begin_layout Plain Layout
 
-qqplot(x,rnorm(100,0,1))
+qqplot(x,rnorm(100,0,1))	#distribution quantile/quantile
 \end_layout
 
 \end_inset
@@ -1245,29 +1315,6 @@ figures multiples
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-améliorer le graphique, couleur, courbe de densitée
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-faire un graphique avec des sous figures et des figures enrobés de texte
 \end_layout
 
 \end_inset
@@ -1422,6 +1469,10 @@ name "fig:Variable-normale"
 
 \end_layout
 
+\begin_layout Subsubsection*
+Enrobé de figure.
+\end_layout
+
 \begin_layout Standard
 Une autre manière de faire consiste à générer le graphique à un endroit
  quelconque du document et à mettre l'option 
@@ -1430,13 +1481,13 @@ fig.show
 \series default
 ='hide' ce qui ne produit aucune figure dans le document mais celle-ci est
  quand même écrite sur le disque dur il ne reste plus qu'a intégrer la figure
- de manière classique.
+ de manière classique comme pour cet enrobé de figure.
  
 \end_layout
 
 \begin_layout Standard
 \begin_inset Flex Chunk
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1503,7 +1554,7 @@ figure
  le code ce qui permet d’accélérer la compilation.
  On peut tirer partie de ce mécanisme lorsque l'on veut intégrer une figure
  dans un environnement qui ne peut accepter du code R, par exemple dans
- un enrobé de figure avec window{} du package picinpar comme le figure ci-contre.
+ un enrobé de figure avec window{} du package picinpar comme la figure ci-contre.
  Il faut alors compiler deux fois le document une fois pour créer l'image
  et l'enregistrer sur le disque et une autre fois pour intégrer l'image
  dans le document.
@@ -1515,6 +1566,98 @@ status open
 
 \backslash
 end{window}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Graphique avec ggplot2.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<graphggplot, out.width="8cm", Options=T>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+library(ggplot2)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+mtcars$gear <- factor(mtcars$gear,levels=c(3,4,5),    
+\end_layout
+
+\begin_layout Plain Layout
+
+labels=c("3 vitesses","4 vitesses","5 vitesses")) 
+\end_layout
+
+\begin_layout Plain Layout
+
+mtcars$am <- factor(mtcars$am,levels=c(0,1),    
+\end_layout
+
+\begin_layout Plain Layout
+
+labels=c("Automatique","Manuelle")) 
+\end_layout
+
+\begin_layout Plain Layout
+
+mtcars$cyl <- factor(mtcars$cyl,levels=c(4,6,8),    
+\end_layout
+
+\begin_layout Plain Layout
+
+labels=c("4cyl","6cyl","8cyl"))
+\end_layout
+
+\begin_layout Plain Layout
+
+qplot(mpg, data=mtcars, geom="density", fill=gear, alpha=I(.5),    
+\end_layout
+
+\begin_layout Plain Layout
+
+main="Distribution de la consommation", xlab="Miles par Gallon",    ylab="Densit
+é")
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Graphique ggplot2
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1604,13 +1747,26 @@ perspective
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+faire un graphique en rgl
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection*
 Cartographie.
 \end_layout
 
 \begin_layout Standard
 La représentation de cartes se fait de la même manière que les graphiques,
- seule quelques bibliothèques R supplémentaires sont nécessaires, notamment
+ seules quelques bibliothèques R supplémentaires sont nécessaires, notamment
  
 \series bold
 sp
@@ -1647,11 +1803,6 @@ rgdal
 \end_layout
 
 \begin_layout Standard
-couche1 est un objet de type spatialPolygonDataFrame.
- 
-\end_layout
-
-\begin_layout Standard
 
 \series bold
 readOGR
@@ -1678,18 +1829,6 @@ on accède au dataframe de l'objet spatial avec le slot
 \end_layout
 
 \begin_layout Standard
-
-\series bold
-str
-\series default
-() indique la structure de l'objet et 
-\series bold
-head
-\series default
-() les 10 premiers enregistrement.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 placement H
 wide false
@@ -1713,12 +1852,12 @@ library(rgdal)
 
 \begin_layout Plain Layout
 
-couche1<-readOGR(layer='Scottish', dsn='data', verbose=F)
+ecosse<-readOGR(layer='Scottish', dsn='data', verbose=F)
 \end_layout
 
 \begin_layout Plain Layout
 
-plot(couche1)
+plot(ecosse)
 \end_layout
 
 \begin_layout Plain Layout
@@ -1749,9 +1888,9 @@ box()
 \end_layout
 
 \begin_layout Standard
-D’autres bibliothèques peuvent améliorer l'apparence (sp, rgrs, ggplot2,
- cartography ...) liste non exhaustive, voir également Analyse spatiales sous
- R de Nicolas Casajus 
+D’autres bibliothèques peuvent améliorer l'apparence (sp, rgrs, ggmap, cartograp
+hy, tmap...) liste non exhaustive, voir également Analyse spatiales sous R
+ de Nicolas Casajus 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "gisonr"
@@ -1787,12 +1926,12 @@ status open
 
 \begin_layout Plain Layout
 
-head(couche1@data)
+head(ecosse@data)
 \end_layout
 
 \begin_layout Plain Layout
 
-spplot(couche1, zcol=c('pcaff'))
+spplot(ecosse, zcol=c('pcaff'))
 \end_layout
 
 \end_inset
@@ -1810,19 +1949,6 @@ spplot(couche1, zcol=c('pcaff'))
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-mettre un exemple de graphique cartograhy et rgl
 \end_layout
 
 \end_inset
@@ -1883,7 +2009,7 @@ cols <- carto.pal(pal1 = "green.pal", n1 = 2, pal2 = "red.pal", n2 = 4) #creer
 
 \begin_layout Plain Layout
 
-plot(couche1, border = NA, col = NA, bg = "#A6CAE0") #couleur du fond (mer)
+plot(ecosse, border = NA, col = NA, bg = "#A6CAE0") #couleur du fond (mer)
 \end_layout
 
 \begin_layout Plain Layout
@@ -1892,8 +2018,8 @@ plot(couche1, border = NA, col = NA, bg = "#A6CAE0") #couleur du fond (mer)
 
 \begin_layout Plain Layout
 
-couche1@data$Sir<-couche1@data$Observed/couche1@data$Expected #vecteur a
- cartographier
+ecosse@data$Sir<-ecosse@data$Observed/ecosse@data$Expected #vecteur a cartograph
+ier
 \end_layout
 
 \begin_layout Plain Layout
@@ -1902,12 +2028,12 @@ couche1@data$Sir<-couche1@data$Observed/couche1@data$Expected #vecteur a
 
 \begin_layout Plain Layout
 
-choroLayer(spdf = couche1,      
+choroLayer(spdf = ecosse,      
 \end_layout
 
 \begin_layout Plain Layout
 
-	df = couche1@data,           
+	df = ecosse@data,           
 \end_layout
 
 \begin_layout Plain Layout
@@ -2010,7 +2136,7 @@ layoutLayer(title = "Cancer de la lèvre en Ecosse",
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
+Incidence du cancer de la lèvre en Ecosse
 \end_layout
 
 \end_inset
@@ -2028,7 +2154,31 @@ layoutLayer(title = "Cancer de la lèvre en Ecosse",
 \end_layout
 
 \begin_layout Standard
-Graphique avec ggplot2.
+Et enfin avec le package tmap
+\begin_inset CommandInset citation
+LatexCommand cite
+key "tmap"
+
+\end_inset
+
+ (thematic map) sûrement le plus abouti des packages pour afficher des cartes
+ dont appréciera la concision du code ou une seule ligne de code est nécessaire
+ pour afficher la figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Espérance-de-vie"
+
+\end_inset
+
+, il est à noter que tmap suit à peu près la même 
+\begin_inset Quotes fld
+\end_inset
+
+grammaire
+\begin_inset Quotes frd
+\end_inset
+
+ graphique que ggplot2.
 \end_layout
 
 \begin_layout Standard
@@ -2044,57 +2194,22 @@ status open
 
 \begin_layout Plain Layout
 
-<<graphggplot, out.width="8cm", Options=T>>=
+<<tmap1, out.width="8cm", Options=TRUE>>=
 \end_layout
 
 \begin_layout Plain Layout
 
-library(ggplot2)
+library(tmap)
 \end_layout
 
 \begin_layout Plain Layout
 
+data(Europe)
 \end_layout
 
 \begin_layout Plain Layout
 
-mtcars$gear <- factor(mtcars$gear,levels=c(3,4,5),    
-\end_layout
-
-\begin_layout Plain Layout
-
-labels=c("3 vitesses","4 vitesses","5 vitesses")) 
-\end_layout
-
-\begin_layout Plain Layout
-
-mtcars$am <- factor(mtcars$am,levels=c(0,1),    
-\end_layout
-
-\begin_layout Plain Layout
-
-labels=c("Automatique","Manuelle")) 
-\end_layout
-
-\begin_layout Plain Layout
-
-mtcars$cyl <- factor(mtcars$cyl,levels=c(4,6,8),    
-\end_layout
-
-\begin_layout Plain Layout
-
-labels=c("4cyl","6cyl","8cyl"))
-\end_layout
-
-\begin_layout Plain Layout
-
-qplot(mpg, data=mtcars, geom="density", fill=gear, alpha=I(.5),    
-\end_layout
-
-\begin_layout Plain Layout
-
-main="Distribution de la consommation", xlab="Miles par Gallon",    ylab="Densit
-é")
+qtm(Europe)
 \end_layout
 
 \end_inset
@@ -2106,7 +2221,61 @@ main="Distribution de la consommation", xlab="Miles par Gallon",    ylab="Densit
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Graphique ggplot2
+Europe
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<tmap2,out.width="8cm", Options=TRUE>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+qtm(Europe, fill="life_exp")+tm_scale_bar()
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Espérance de vie en Europe
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Espérance-de-vie"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -2841,7 +3010,7 @@ Par exemple pour que les nombres soient affichés avec un arrondis à deux
 
 \begin_layout Standard
 \begin_inset Flex Chunk
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -2879,6 +3048,24 @@ status collapsed
 
 \begin_layout Plain Layout
 montrer que l on peut utiliser une expression R pour la valeur d'une option
+ ex afficher le code ou non pour l'ensemble du document
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+montrer un cycle de developpement, anova?
 \end_layout
 
 \end_inset
@@ -2987,6 +3174,17 @@ key "cartography"
 \end_inset
 
 https://cran.r-project.org/web/packages/cartography/index.html
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "tmap"
+key "tmap"
+
+\end_inset
+
+https://cran.r-project.org/web/packages/tmap/index.html
 \end_layout
 
 \end_body
