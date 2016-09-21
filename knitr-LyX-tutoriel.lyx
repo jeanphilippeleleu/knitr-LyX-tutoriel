@@ -18,12 +18,12 @@ knitr
 \language_package default
 \inputencoding utf8
 \fontencoding global
-\font_roman "default" "default"
+\font_roman "default" "Droid Serif"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
 \font_default_family default
-\use_non_tex_fonts false
+\use_non_tex_fonts true
 \font_sc false
 \font_osf false
 \font_sf_scale 100 100
@@ -58,8 +58,8 @@ knitr
 \use_package stackrel 1
 \use_package stmaryrd 1
 \use_package undertilde 1
-\cite_engine basic
-\cite_engine_type default
+\cite_engine natbib
+\cite_engine_type numerical
 \biblio_style plain
 \use_bibtopic false
 \use_indices false
@@ -166,7 +166,7 @@ Présentation.
 \end_layout
 
 \begin_layout Standard
-Knitr est un acronyme provenant de l'anglais 'to knit' qui veux dire tricoter
+Knitr est un acronyme provenant de l'anglais 'to knit' qui veut dire tricoter
  et 'r' pour le langage R
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -195,7 +195,7 @@ Il est à noter que d'autres langage que R peuvent être utiliser avec knitr
 
 \end_inset
 
-au sein d'un document textuel c'est que l'on appel de la programmation littérale.
+au sein d'un document textuel.
  Réalisé par yihui xie
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1245,11 +1245,47 @@ par()
 \end_layout
 
 \begin_layout Standard
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+par(mfrow=c(2,2))
+\end_layout
+
+\end_inset
+
+ : segmente la sortie en 2 lignes et 2 colonnes, les différentes parties
+ se remplissant au fur et à mesure, avec 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+c(1,2)
+\end_layout
+
+\end_inset
+
+: 1 ligne et 2 colonnes.
+\end_layout
+
+\begin_layout Itemize
+mfrow() remplit d'abord par lignes.
+\end_layout
+
+\begin_layout Itemize
+mfcol() remplit d'abord par colonnes.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Flex Chunk
@@ -1469,6 +1505,19 @@ name "fig:Variable-normale"
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Ajout de légende et de formule dans les graphes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection*
 Enrobé de figure.
 \end_layout
@@ -1566,6 +1615,19 @@ status open
 
 \backslash
 end{window}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+mettre le code latex pour l'enrobé de figure
 \end_layout
 
 \end_inset
@@ -1747,12 +1809,106 @@ perspective
 
 \end_layout
 
+\begin_layout Subsubsection*
+Graphique avec la librairie rgl.
+\end_layout
+
 \begin_layout Standard
-\begin_inset Note Note
+La librairie rgl permet l'affichage et la manipulation à la sourie d'objet
+ 3D dans R.
+ On doit bien évidement charger la librairie avant tout et définir une nouvelle
+ option avec 
+\begin_inset listings
+lstparams "language=R,basicstyle={\rmfamily}"
+inline true
 status open
 
 \begin_layout Plain Layout
-faire un graphique en rgl
+
+knit_hooks$set(rgl = hook_rgl)
+\end_layout
+
+\end_inset
+
+ comme ci-dessous.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status collapsed
+
+\begin_layout Plain Layout
+
+<<Options=T>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+library(rgl)
+\end_layout
+
+\begin_layout Plain Layout
+
+knit_hooks$set(rgl = hook_rgl)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Puis on peut utiliser cette option dans les blocs de codes suivant avec
+ la nouvelle option rgl=TRUE.
+ Des erreurs peuvent survenir dans la sortie \SpecialChar LaTeX
+ avec une figure rgl cependant
+ il faut passer outre et afficher le document malgré tout, en général celui-ci
+ est bien rendu.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+<<image-rgl, rgl=TRUE, dev='png', out.width='3in', fig.align='center', fig.show='ho
+ld', Options=T>>=  
+\end_layout
+
+\begin_layout Plain Layout
+
+demo('bivar', package='rgl', echo=FALSE) 
+\end_layout
+
+\begin_layout Plain Layout
+
+par3d(zoom=.7)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+RGL
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1833,7 +1989,7 @@ on accède au dataframe de l'objet spatial avec le slot
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -1852,17 +2008,18 @@ library(rgdal)
 
 \begin_layout Plain Layout
 
-ecosse<-readOGR(layer='Scottish', dsn='data', verbose=F)
+ecosse<-readOGR(layer='Scottish', dsn='data', verbose=F)	#charge le fichier
+ shp
 \end_layout
 
 \begin_layout Plain Layout
 
-plot(ecosse)
+plot(ecosse)	#affiche la carte
 \end_layout
 
 \begin_layout Plain Layout
 
-box()
+box()		   #dessine un cadre
 \end_layout
 
 \end_inset
@@ -2922,7 +3079,7 @@ Options=TRUE
 
 \begin_layout Standard
 \begin_inset Flex Chunk
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -3053,10 +3210,6 @@ montrer que l on peut utiliser une expression R pour la valeur d'une option
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 
 \end_layout
 
